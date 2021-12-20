@@ -21,7 +21,7 @@ Lastly, after presenting your projects next Friday, you will be required to comp
 
 ## Planning & Presentation Requirements
 
-### Planning - Due This Thursday:
+### Planning - Due Monday, Jan 3, 2022:
 
 - You will share:
 
@@ -31,7 +31,7 @@ Lastly, after presenting your projects next Friday, you will be required to comp
 
 	☐ Pseudocode for the overall game play.
 
-### Presentation - Next Friday:
+### Presentation - [Date]:
 
 You will have a maximum of 10 minutes to present your project following these guidelines:
 
