@@ -1,40 +1,48 @@
-//Creating cards/numbers
-// let suits = ["♠", "♣", "♥", "♦"]
-// let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-// let deck = []
 
-// for(let i=0; i<4; i++) {
-//     for(let j=0; j<13; j++) {
-//         deck.push(ranks[j] + suits[i])
-//     }
-// }
-// console.log(deck)
+
+
+
+//game variables
 const deck = [
-    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
-    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
-    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
-    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
 ]
-
 let dealerHand
 let playerHand
 let playerHandValue
 let dealerHandValue
+let suits = ["♠", "♣", "♥", "♦"]
+let ranks = ["A1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+let deckVisual = []
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
 
+for(let i=0; i<4; i++) {
+    for(let j=0; j<14; j++) {
+        deckVisual.push(ranks[j] + suits[i])
+    }
+}
+console.log(deckVisual)
+console.log(deck)
+
+
+//function draws a random card from the deck array
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
     return deck[randomIndex]
 }
 
+//function assigns two random cards from deck array to player and dealer
 function startGame() {
     playerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
 }
 startGame()
 
+//function calculates the total of hand
 function getHandValue(hand) {
     let sum = 0
     for(let i=0; i<hand.length; i++) {
@@ -43,29 +51,31 @@ function getHandValue(hand) {
     return sum
 }
 
+//Text to display on HTML page on page load
 document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
 document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
 document.getElementById("dealer-hand").innerText = `Dealer's hand is: ?${dealerHand[1]}`
 document.getElementById("dealer-hand-value").innerText = `Value: ???`
 
+// function for player to hit.  adds new card to player hand and displays new value. If player busts, game over.
 function hitMe() {
     playerHand.push(drawRandomCard(deck))
-    console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
     if(getHandValue(playerHand) > 21) {
         document.querySelector("#hit").style.display = "none"
         document.querySelector("#stand").style.display = "none"
-        document.getElementById("game-message").innerText = `BUST!`
+        document.getElementById("game-message").innerText = `You busted! Dealer wins.`
         document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
         document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
 }
-
+//calls hitMe() when hit button is clicked
 hitButton.addEventListener("click", () => {
     hitMe()
 })
 
+//event listener for stand button. compares values and makes dealer draw if handvalue < 17
 standButton.addEventListener("click", () => {
     document.querySelector("#hit").style.display = "none"
     document.querySelector("#stand").style.display = "none"
@@ -83,11 +93,13 @@ standButton.addEventListener("click", () => {
     compareValues(getHandValue(dealerHand), getHandValue(playerHand))
 })
 
+//event listener for new game button.  temporarily refreshes page.
 newGameButton.addEventListener("click", () => {
     window.location.reload()
     // startGame()
 })
 
+//function to compare values of each hand
 function compareValues(d, p) {
     if(d > 21) {
         document.getElementById("game-message").innerText = `Dealer BUSTS!`
@@ -99,3 +111,55 @@ function compareValues(d, p) {
         document.getElementById("game-message").innerText = `Push!`
     }
 }
+
+
+
+
+
+
+
+
+
+//ignoring for now
+// //assigning # to Spades
+// for(let i=0; i<=9; i++) {
+//     numericDeck[i] = (i + 1)
+//     numericDeck.push(deck[i])
+// }
+// for(let i=10; i<=12; i++) {
+//     numericDeck[i] = 10
+// }
+// numericDeck[13] = 11
+
+// //assigning # to clubs
+// for(let i=14; i<=23; i++) {
+//     deck[i] = (i + 1)
+// }
+
+// for(let i=24; i<=26; i++) {
+//     deck[i] = 10
+// }
+// deck[27] = 11
+
+// //assigning # to hearts
+// for(let i=28; i<=37; i++) {
+//     deck[i] = (i + 1)
+// }
+
+// for(let i=38; i<=40; i++) {
+//     deck[i] = 10
+// }
+// deck[27] = 41
+
+// //assigning # to diamonds
+// for(let i=41; i<=51; i++) {
+//     deck[i] = (i + 1)
+// }
+
+// for(let i=52; i<=54; i++) {
+//     deck[i] = 10
+// }
+// deck[55] = 11
+
+// console.log(deck)
+// console.log(numericDeck)
