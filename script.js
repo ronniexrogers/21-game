@@ -69,19 +69,31 @@ standButton.addEventListener("click", () => {
         dealerHand.push(drawRandomCard(deck))}
 
     }else if(getHandValue(dealerHand) >= 17 && getHandValue(dealerHand) <= 21) {
-        console.log("between 17-21")
 
     }else if(getHandValue(dealerHand) > 21) {
         document.getElementById("game-message").innerText = `Dealer BUSTS!`
     }
     document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
     document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
+    compareValues(getHandValue(dealerHand), getHandValue(playerHand))
 })
 
 newGameButton.addEventListener("click", () => {
     window.location.reload()
     // startGame()
 })
+
+function compareValues(d, p) {
+    if(d > 21) {
+        document.getElementById("game-message").innerText = `Dealer BUSTS!`
+    }else if(d > p) {
+        document.getElementById("game-message").innerText = `Dealer wins!`
+    }else if(d < p) {
+        document.getElementById("game-message").innerText = `You win!`
+    }else if(d === p) {
+        document.getElementById("game-message").innerText = `Push!`
+    }
+}
 
 
 
