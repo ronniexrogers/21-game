@@ -22,6 +22,7 @@ let playerHandValue
 let dealerHandValue
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
+const standButton = document.querySelector("#stand")
 
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
@@ -51,7 +52,7 @@ function hitMe() {
     playerHand.push(drawRandomCard(deck))
     console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
     if(getHandValue(playerHand) > 21) {
-        document.getElementById("bust").innerText = `BUST!`
+        document.getElementById("game-message").innerText = `BUST!`
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
@@ -59,6 +60,22 @@ function hitMe() {
 
 hitButton.addEventListener("click", () => {
     hitMe()
+})
+
+standButton.addEventListener("click", () => {
+
+    if(getHandValue(dealerHand) < 17) {
+        for(let i=0; getHandValue(dealerHand)<17; i++) {
+        dealerHand.push(drawRandomCard(deck))}
+
+    }else if(getHandValue(dealerHand) >= 17 && getHandValue(dealerHand) <= 21) {
+        console.log("between 17-21")
+
+    }else if(getHandValue(dealerHand) > 21) {
+        document.getElementById("game-message").innerText = `Dealer BUSTS!`
+    }
+    document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
+    document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
 })
 
 newGameButton.addEventListener("click", () => {
