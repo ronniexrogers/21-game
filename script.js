@@ -52,6 +52,8 @@ function hitMe() {
     playerHand.push(drawRandomCard(deck))
     console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
     if(getHandValue(playerHand) > 21) {
+        document.querySelector("#hit").style.display = "none"
+        document.querySelector("#stand").style.display = "none"
         document.getElementById("game-message").innerText = `BUST!`
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
@@ -63,7 +65,8 @@ hitButton.addEventListener("click", () => {
 })
 
 standButton.addEventListener("click", () => {
-
+    document.querySelector("#hit").style.display = "none"
+    document.querySelector("#stand").style.display = "none"
     if(getHandValue(dealerHand) < 17) {
         for(let i=0; getHandValue(dealerHand)<17; i++) {
         dealerHand.push(drawRandomCard(deck))}
@@ -94,7 +97,3 @@ function compareValues(d, p) {
         document.getElementById("game-message").innerText = `Push!`
     }
 }
-
-
-
-
