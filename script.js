@@ -16,8 +16,10 @@ const deck = [
     2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
 ]
 
-let dealerHand = []
-let playerHand = []
+let dealerHand
+let playerHand
+let playerHandValue
+let dealerHandValue
 
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
@@ -30,17 +32,19 @@ function startGame() {
 }
 startGame()
 
-console.log(`Players hand is: ${playerHand}. And dealer's hand is: ${dealerHand}.`)
+function getHandValue(hand) {
+    let sum = 0
+    for(let i=0; i<hand.length; i++) {
+        sum += hand[i] 
+    }
+    return sum
+}
+dealerHandValue = getHandValue(dealerHand)
+playerHandValue = getHandValue(playerHand)
 
 
 
+console.log(`Dealers hand is ${dealerHand} with a value of: ${dealerHandValue}. And your hand is ${playerHand} with a value of ${playerHandValue}.`)
 
 
 
-//Creating logic establishing rules
-// function getScore(cards) {
-//     let score = 0
-//     for (let i=0; i<cards.length; i++) {
-        
-//     }
-// }
