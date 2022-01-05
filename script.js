@@ -45,8 +45,8 @@ function getHandValue(hand) {
 
 document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
 document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
-document.getElementById("dealer-hand").innerText = `Dealer's hand is: ${dealerHand}`
-document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
+document.getElementById("dealer-hand").innerText = `Dealer's hand is: ?${dealerHand[1]}`
+document.getElementById("dealer-hand-value").innerText = `Value: ???`
 
 function hitMe() {
     playerHand.push(drawRandomCard(deck))
