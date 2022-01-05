@@ -42,6 +42,7 @@ function getHandValue(hand) {
 }
 console.log(`Your hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
 
+
 hitButton.addEventListener("click", () => {
     playerHand.push(drawRandomCard(deck))
     console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
@@ -49,6 +50,11 @@ hitButton.addEventListener("click", () => {
         console.log("Bust!")
     }
 })
+
+document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
+document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
+document.getElementById("dealer-hand").innerText = `Dealer's hand is: ${dealerHand}`
+document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
 
 
 
