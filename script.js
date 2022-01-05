@@ -20,6 +20,7 @@ let dealerHand
 let playerHand
 let playerHandValue
 let dealerHandValue
+const hitButton = document.querySelector("#hit")
 
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
@@ -39,12 +40,19 @@ function getHandValue(hand) {
     }
     return sum
 }
-dealerHandValue = getHandValue(dealerHand)
-playerHandValue = getHandValue(playerHand)
+console.log(`Your hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
+
+hitButton.addEventListener("click", () => {
+    playerHand.push(drawRandomCard(deck))
+    console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
+    if(getHandValue(playerHand) > 21) {
+        console.log("Bust!")
+    }
+})
 
 
 
-console.log(`Dealers hand is ${dealerHand} with a value of: ${dealerHandValue}. And your hand is ${playerHand} with a value of ${playerHandValue}.`)
+
 
 
 
