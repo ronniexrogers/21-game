@@ -21,6 +21,7 @@ let playerHand
 let playerHandValue
 let dealerHandValue
 const hitButton = document.querySelector("#hit")
+const newGameButton = document.querySelector("#new-game")
 
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
@@ -40,24 +41,30 @@ function getHandValue(hand) {
     }
     return sum
 }
-console.log(`Your hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
-
-
-hitButton.addEventListener("click", () => {
-    playerHand.push(drawRandomCard(deck))
-    console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
-    if(getHandValue(playerHand) > 21) {
-        console.log("Bust!")
-    }
-})
 
 document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
 document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
 document.getElementById("dealer-hand").innerText = `Dealer's hand is: ${dealerHand}`
 document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
 
+function hitMe() {
+    playerHand.push(drawRandomCard(deck))
+    console.log(`Your new hand is ${playerHand} with a value of ${getHandValue(playerHand)}.`)
+    if(getHandValue(playerHand) > 21) {
+        document.getElementById("bust").innerText = `BUST!`
+    }
+    document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
+    document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
+}
 
+hitButton.addEventListener("click", () => {
+    hitMe()
+})
 
+newGameButton.addEventListener("click", () => {
+    window.location.reload()
+    // startGame()
+})
 
 
 
