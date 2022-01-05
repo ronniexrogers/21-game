@@ -16,11 +16,21 @@ const deck = [
     2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
 ]
 
+let dealerHand = []
+let playerHand = []
+
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
     return deck[randomIndex]
 }
-console.log(drawRandomCard(deck))
+
+function startGame() {
+    playerHand = [drawRandomCard(deck), drawRandomCard(deck)]
+    dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
+}
+startGame()
+
+console.log(`Players hand is: ${playerHand}. And dealer's hand is: ${dealerHand}.`)
 
 
 
