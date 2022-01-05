@@ -55,6 +55,8 @@ function hitMe() {
         document.querySelector("#hit").style.display = "none"
         document.querySelector("#stand").style.display = "none"
         document.getElementById("game-message").innerText = `BUST!`
+        document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
+        document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
