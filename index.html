@@ -9,10 +9,12 @@
 </head>
 <body>
     <h1 id="h1-header">♠Black Jack♠</h1>
+    <div id="hands">
     <div id="dealer-hand"></div>
     <div id="dealer-hand-value"></div>
     <div id="player-hand"></div> 
     <div id="player-hand-value"></div>
+    </div>
     <button class ="button" id="hit">Hit me!</button>
     <button class ="button" id="stand">Stand</button>
     <button class ="button" id="new-game">New hand</button>
@@ -36,7 +38,9 @@
             <li>If the dealer's total is the same as your total, it's a draw!</li>
         </ul>
     </div>
-    <button id="rules">Game Rules</button>
+    <div id="button-div">
+    <button id="rules-button">Game Rules</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

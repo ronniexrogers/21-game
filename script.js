@@ -17,7 +17,7 @@ const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
 const modalContainer = document.getElementById("modal")
-const rulesButton = document.querySelector("#rules")
+const rulesButton = document.querySelector("#rules-button")
 const rules = document.querySelector("#game-rules")
 
 
