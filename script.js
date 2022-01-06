@@ -16,12 +16,19 @@ let index
 let resetButton = document.querySelector("#reset-button")
 let playerScore = 0
 let dealerScore = 0
+let gameOver = false
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
 const modalContainer = document.getElementById("modal")
 const rulesButton = document.querySelector("#rules-button")
 const rules = document.querySelector("#game-rules")
+
+//function to hide start game button
+function hideStart() {
+newGameButton.style.display = "none"
+}
+hideStart()
 
 //combines suits array with ranks array and creates new array called deckVisual
 for(let i=0; i<4; i++) {
@@ -45,7 +52,6 @@ function getHandValue(hand) {
     return sum
 }
 
-
 // function for player to hit.  adds new card to player hand and displays new value. If player busts, game over.
 function hitMe() {
     playerHand.push(drawRandomCard(deck))
@@ -57,6 +63,7 @@ function hitMe() {
         document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
         modalContainer.classList.add("show")
         document.querySelector("#dealer-score").innerText = dealerScore += 1
+        newGameButton.style.display = "inline"
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
@@ -86,22 +93,27 @@ function compareValues(d, p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `You win! Dealer BUSTS! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#player-score").innerText = playerScore += 1
+        newGameButton.style.display = "inline"
     }else if(d > p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `Dealer wins! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#dealer-score").innerText = dealerScore += 1
+        newGameButton.style.display = "inline"
     }else if(d < p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `You win! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#player-score").innerText = playerScore += 1
+        newGameButton.style.display = "inline"
     }else if(d === p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `Push! You both have ${getHandValue(playerHand)}.`
+        newGameButton.style.display = "inline"
     }
 }
 
 //function assigns two random cards from deck array to player and dealer
 function startGame() {
+    hideStart()
     playerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
