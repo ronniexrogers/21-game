@@ -1,7 +1,3 @@
-
-
-
-
 //game variables
 const deck = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
@@ -14,33 +10,30 @@ let playerHand
 let playerHandValue
 let dealerHandValue
 let suits = ["♠", "♣", "♥", "♦"]
-let ranks = ["A1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+let ranks = ["A1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A11"]
 let deckVisual = []
+let index
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
+const modalContainer = document.getElementById("modal")
 
+
+//combines suits array with ranks array and creates new array called deckVisual
 for(let i=0; i<4; i++) {
     for(let j=0; j<14; j++) {
         deckVisual.push(ranks[j] + suits[i])
     }
 }
+
 console.log(deckVisual)
 console.log(deck)
-
 
 //function draws a random card from the deck array
 function drawRandomCard(deck) {
     let randomIndex = Math.floor(deck.length * Math.random())
     return deck[randomIndex]
 }
-
-//function assigns two random cards from deck array to player and dealer
-function startGame() {
-    playerHand = [drawRandomCard(deck), drawRandomCard(deck)]
-    dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
-}
-startGame()
 
 //function calculates the total of hand
 function getHandValue(hand) {
@@ -51,11 +44,9 @@ function getHandValue(hand) {
     return sum
 }
 
-//Text to display on HTML page on page load
-document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
-document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
-document.getElementById("dealer-hand").innerText = `Dealer's hand is: ?${dealerHand[1]}`
-document.getElementById("dealer-hand-value").innerText = `Value: ???`
+//Text to display when page loads
+
+console.log()
 
 // function for player to hit.  adds new card to player hand and displays new value. If player busts, game over.
 function hitMe() {
@@ -63,9 +54,10 @@ function hitMe() {
     if(getHandValue(playerHand) > 21) {
         document.querySelector("#hit").style.display = "none"
         document.querySelector("#stand").style.display = "none"
-        document.getElementById("game-message").innerText = `You busted! Dealer wins.`
+        document.getElementById("game-message").innerHTML = `Dealer wins! You busted! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
         document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
+        modalContainer.classList.add("show")
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
@@ -82,35 +74,53 @@ standButton.addEventListener("click", () => {
     if(getHandValue(dealerHand) < 17) {
         for(let i=0; getHandValue(dealerHand)<17; i++) {
         dealerHand.push(drawRandomCard(deck))}
-
-    }else if(getHandValue(dealerHand) >= 17 && getHandValue(dealerHand) <= 21) {
-
-    }else if(getHandValue(dealerHand) > 21) {
-        document.getElementById("game-message").innerText = `Dealer BUSTS!`
-    }
+        }
     document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
     document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
     compareValues(getHandValue(dealerHand), getHandValue(playerHand))
+    modalContainer.classList.add("show")
 })
 
-//event listener for new game button.  temporarily refreshes page.
-newGameButton.addEventListener("click", () => {
-    window.location.reload()
-    // startGame()
-})
-
-//function to compare values of each hand
+//function to compare values of each hand and display message
 function compareValues(d, p) {
     if(d > 21) {
-        document.getElementById("game-message").innerText = `Dealer BUSTS!`
+        modalContainer.classList.add("show")
+        document.getElementById("game-message").innerText = `You win! Dealer BUSTS! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
     }else if(d > p) {
-        document.getElementById("game-message").innerText = `Dealer wins!`
+        modalContainer.classList.add("show")
+        document.getElementById("game-message").innerText = `Dealer wins! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
     }else if(d < p) {
-        document.getElementById("game-message").innerText = `You win!`
+        modalContainer.classList.add("show")
+        document.getElementById("game-message").innerText = `You win! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
     }else if(d === p) {
-        document.getElementById("game-message").innerText = `Push!`
+        modalContainer.classList.add("show")
+        document.getElementById("game-message").innerText = `Push! You both have ${getHandValue(playerHand)}.`
     }
 }
+
+//function assigns two random cards from deck array to player and dealer
+function startGame() {
+    playerHand = [drawRandomCard(deck), drawRandomCard(deck)]
+    dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
+    document.getElementById("player-hand").innerText = `Your hand is: ${playerHand}`
+    document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
+    document.getElementById("dealer-hand").innerText = `Dealer's hand is: ?${dealerHand[1]}`
+    document.getElementById("dealer-hand-value").innerText = `Value: ???`
+    modalContainer.classList.remove("show")
+}
+startGame()
+
+//event listener for new game button.
+newGameButton.addEventListener("click", () => {
+    // window.location.reload()
+    startGame() 
+    document.querySelector("#hit").style.display = "inline"
+    document.querySelector("#stand").style.display = "inline"
+    modalContainer.classList.remove("show")
+})
+
+
+
 
 
 
