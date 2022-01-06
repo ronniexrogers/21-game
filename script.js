@@ -17,6 +17,9 @@ const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
 const modalContainer = document.getElementById("modal")
+const rulesButton = document.querySelector("#rules")
+const rules = document.querySelector("#game-rules")
+
 
 
 //combines suits array with ranks array and creates new array called deckVisual
@@ -119,6 +122,17 @@ newGameButton.addEventListener("click", () => {
     modalContainer.classList.remove("show")
 })
 
+function toggleRules() {
+        if(rules.style.display === "block") {
+            rules.style.display = "none"
+        }else{
+            rules.style.display = "block"
+        }
+    }
+
+rulesButton.addEventListener("click", () => {
+    toggleRules()
+})
 
 
 
