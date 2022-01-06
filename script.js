@@ -13,6 +13,7 @@ let suits = ["♠", "♣", "♥", "♦"]
 let ranks = ["A1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A11"]
 let deckVisual = []
 let index
+let resetButton = document.querySelector("#reset-button")
 let playerScore = 0
 let dealerScore = 0
 const hitButton = document.querySelector("#hit")
@@ -130,3 +131,12 @@ function toggleRules() {
 rulesButton.addEventListener("click", () => {
     toggleRules()
 })
+
+//function to reset scores to 0 when reset button is pressed
+resetButton.addEventListener("click", () => {
+    playerScore = 0
+    dealerScore = 0
+    document.querySelector("#player-score").innerText = 0
+    document.querySelector("#dealer-score").innerText = 0
+})
+
