@@ -3,38 +3,6 @@
     user-select: none;
 }
 
-@media (max-width: 480px) {
-
-    #game-rules {
-        height: 100px;
-        overflow: auto;
-    }
-
-    #button-div {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        margin: 10px 0px 0px 10px;
-    }
-
-    #rules-button {
-        opacity: .7;
-    }
-}
-
-@media (min-width: 800px) {
-    button:hover {
-        background-color: rgba(255, 255, 255, 0.281)
-    }
-}
-
-@media (max-width: 640px) {
-    #game-rules {
-        height: 100px;
-        overflow: auto;
-    }
-}
-
 body {
     background-color: #238505;
     text-align: center;
@@ -55,7 +23,7 @@ button {
 #modal {
     background-color: rgba(167, 167, 167, 0.733);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 30px 0px 15px;
+    padding: 30px 0px 30px;
     border-radius: 5px;
     width: 500px;
     max-width: 100%;
@@ -73,13 +41,13 @@ button {
 #game-rules {
     background-color: rgba(167, 167, 167, 0.733);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    /* padding: 30px 0px 15px; */
     border-radius: 5px;
-    width: 650px;
+    width: 500px;
     max-width: 100%;
-    height: 225px;
+    height: 150px;
     margin: 0 auto;
     display: none;
+    overflow: auto;
 }
 
 #game-rules, ul {
@@ -106,4 +74,49 @@ button {
     width: 200px;
     margin: 0 auto;
     border-radius: 10px;
+}
+
+@media (max-width: 710px) {
+    #game-rules {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #game-rules {
+        height: 100px;
+        overflow: auto;
+    }
+
+    #button-div {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin: 10px 0px 0px 10px;
+    }
+
+    #rules-button {
+        opacity: .7;
+    }
+}
+
+@media (min-width: 420px) {
+    button:hover {
+        background-color: rgba(255, 255, 255, 0.281)
+    }
+}
+
+@media (min-height: 600px) {
+    #game-rules {
+        height: 200px;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    #game-rules {
+        height: 100px;
+        overflow: auto;
+    }
 }

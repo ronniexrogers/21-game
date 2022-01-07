@@ -12,7 +12,6 @@ let dealerHandValue
 let suits = ["♠", "♣", "♥", "♦"]
 let ranks = ["A1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A11"]
 let deckVisual = []
-let index
 let resetButton = document.querySelector("#reset-button")
 let playerScore = 0
 let dealerScore = 0
@@ -23,6 +22,7 @@ const standButton = document.querySelector("#stand")
 const modalContainer = document.getElementById("modal")
 const rulesButton = document.querySelector("#rules-button")
 const rules = document.querySelector("#game-rules")
+const closeRules = document.querySelector("#close-rules")
 
 //function to hide start game button
 function hideStart() {
@@ -133,14 +133,20 @@ newGameButton.addEventListener("click", () => {
 })
 
 //function and button to toggle the game rules
-function toggleRules() {
+function toggleRules(event) {
         if(rules.style.display === "block") {
             rules.style.display = "none"
         }else{
             rules.style.display = "block"
-        }
+            rules.style.opacity = ".8"
     }
+}
 rulesButton.addEventListener("click", () => {
+    toggleRules()
+})
+
+closeRules.addEventListener("click", (e) => {
+    e.stopPropagation()
     toggleRules()
 })
 
