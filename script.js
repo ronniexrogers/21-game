@@ -25,6 +25,7 @@ const closeRules = document.querySelector("#close-rules")
 const bgMusic = document.querySelector("#bg-audio")
 const winSound = document.querySelector("#win")
 const loseSound = document.querySelector("#lose")
+const blackjackSound = document.querySelector("#blackjack")
 
 //function to hide start game button
 function hideStart() {
@@ -135,6 +136,14 @@ function startGame() {
     modalContainer.classList.remove("show")
     if(getHandValue(playerHand) > 21) {
         startGame()
+    }else if(getHandValue(playerHand) === 21) {
+        modalContainer.classList.add("show")
+        document.getElementById("game-message").innerText = `BLACKJACK!`
+        document.querySelector("#player-score").innerText = playerScore += 2
+        newGameButton.style.display = "inline"
+        document.querySelector("#hit").style.display = "none"
+        document.querySelector("#stand").style.display = "none"
+        if(isMuted === false){blackjackSound.play()}
     }
 }
 startGame()
@@ -145,6 +154,14 @@ newGameButton.addEventListener("click", () => {
     document.querySelector("#hit").style.display = "inline"
     document.querySelector("#stand").style.display = "inline"
     modalContainer.classList.remove("show")
+    if(getHandValue(playerHand) === 21) {
+        modalContainer.classList.add("show")
+        document.getElementById("game-message").innerText = `BLACKJACK!`
+        newGameButton.style.display = "inline"
+        document.querySelector("#hit").style.display = "none"
+        document.querySelector("#stand").style.display = "none"
+        if(isMuted === false){blackjackSound.play()}
+    }
 })
 
 //function and button to toggle the game rules
@@ -182,6 +199,7 @@ function toggleMusic() {
     if (bgMusic.paused) {
         bgMusic.play()
         bgMusic.loop = true
+        bgMusic.volume = .5
         document.querySelector("#bg-music-button").innerHTML = "🔈"
         isMuted = false
     }else{
