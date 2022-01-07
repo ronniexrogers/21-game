@@ -14,6 +14,7 @@ let playerScore = 0
 let dealerScore = 0
 let gameOver = false
 let hasBlackJack = false
+let isMuted = true
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
@@ -70,7 +71,7 @@ function hitMe() {
         modalContainer.classList.add("show")
         document.querySelector("#dealer-score").innerText = dealerScore += 1
         newGameButton.style.display = "inline"
-        loseSound.play()
+        if(isMuted === false){loseSound.play()}
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
@@ -101,24 +102,24 @@ function compareValues(d, p) {
         document.getElementById("game-message").innerText = `You win! Dealer BUSTS! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#player-score").innerText = playerScore += 1
         newGameButton.style.display = "inline"
-        winSound.play()
+        if(isMuted === false){winSound.play()}
     }else if(d > p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `Dealer wins! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#dealer-score").innerText = dealerScore += 1
         newGameButton.style.display = "inline"
-        loseSound.play()
+        if(isMuted === false){loseSound.play()}
     }else if(d < p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `You win! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#player-score").innerText = playerScore += 1
         newGameButton.style.display = "inline"
-        winSound.play()
+        if(isMuted === false){winSound.play()}
     }else if(d === p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `Push! You both have ${getHandValue(playerHand)}.`
         newGameButton.style.display = "inline"
-        winSound.play()
+        if(isMuted === false){winSound.play()}
     }
 }
 
@@ -182,8 +183,15 @@ function toggleMusic() {
         bgMusic.play()
         bgMusic.loop = true
         document.querySelector("#bg-music-button").innerHTML = "🔈"
+        isMuted = false
     }else{
         bgMusic.pause()
         document.querySelector("#bg-music-button").innerHTML = "🔇"
+        isMuted = true
     }
 }
+document.querySelector("#bg-music-button").addEventListener("click", () => {
+    toggleMusic()
+})
+
+
