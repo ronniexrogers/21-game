@@ -143,7 +143,11 @@ function startGame() {
         newGameButton.style.display = "inline"
         document.querySelector("#hit").style.display = "none"
         document.querySelector("#stand").style.display = "none"
+        document.getElementById("dealer-hand").innerText = `Dealer's hand was: ${dealerHand}`
+        document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
         if(isMuted === false){blackjackSound.play()}
+    }else if(getHandValue(dealerHand) > 21) {
+        dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     }
 }
 startGame()
