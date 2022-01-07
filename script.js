@@ -10,7 +10,7 @@ let playerHand
 let playerHandValue
 let dealerHandValue
 let suits = ["♠", "♣", "♥", "♦"]
-let ranks = ["A1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A11"]
+let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 let deckVisual = []
 let resetButton = document.querySelector("#reset-button")
 let playerScore = 0
@@ -23,6 +23,7 @@ const modalContainer = document.getElementById("modal")
 const rulesButton = document.querySelector("#rules-button")
 const rules = document.querySelector("#game-rules")
 const closeRules = document.querySelector("#close-rules")
+const bgMusic = document.querySelector("#bg-audio")
 
 //function to hide start game button
 function hideStart() {
@@ -32,10 +33,11 @@ hideStart()
 
 //combines suits array with ranks array and creates new array called deckVisual
 for(let i=0; i<4; i++) {
-    for(let j=0; j<14; j++) {
+    for(let j=0; j<13; j++) {
         deckVisual.push(ranks[j] + suits[i])
     }
 }
+console.log(deckVisual)
 
 //function draws a random card from the deck array
 function drawRandomCard(deck) {
@@ -157,4 +159,15 @@ resetButton.addEventListener("click", () => {
     document.querySelector("#player-score").innerText = 0
     document.querySelector("#dealer-score").innerText = 0
 })
+
+//function to toggle background music
+function toggleMusic() {
+    if (bgMusic.paused) {
+        bgMusic.play()
+        document.querySelector("#bg-music-button").innerHTML = "Stop the jazz"
+    }else{
+        bgMusic.pause()
+        document.querySelector("#bg-music-button").innerHTML = "Ya' like jazz?"
+    }
+}
 
