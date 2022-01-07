@@ -5,10 +5,7 @@ const deck = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
 ]
-let dealerHand
-let playerHand
-let playerHandValue
-let dealerHandValue
+let dealerHand, playerHand, playerHandValue, dealerHandValue
 let suits = ["♠", "♣", "♥", "♦"]
 let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 let deckVisual = []
@@ -138,9 +135,13 @@ newGameButton.addEventListener("click", () => {
 function toggleRules(event) {
         if(rules.style.display === "block") {
             rules.style.display = "none"
+            rulesButton.innerHTML = "Game Rules"
+            rulesButton.style.padding = "5px"
         }else{
             rules.style.display = "block"
             rules.style.opacity = ".8"
+            rulesButton.innerHTML = "Hide Rules"
+            rulesButton.style.padding = "5px 10px 5px 10px"
     }
 }
 rulesButton.addEventListener("click", () => {
@@ -164,10 +165,11 @@ resetButton.addEventListener("click", () => {
 function toggleMusic() {
     if (bgMusic.paused) {
         bgMusic.play()
-        document.querySelector("#bg-music-button").innerHTML = "Stop the jazz"
+        bgMusic.loop = true
+        document.querySelector("#bg-music-button").innerHTML = "🔈"
     }else{
         bgMusic.pause()
-        document.querySelector("#bg-music-button").innerHTML = "Ya' like jazz?"
+        document.querySelector("#bg-music-button").innerHTML = "🔇"
     }
 }
 

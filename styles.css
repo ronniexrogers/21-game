@@ -67,6 +67,14 @@ button {
     right: 5px;
     bottom: 5px;
     opacity: .7;
+    padding: 5px
+}
+
+#bg-music-button {
+    position: absolute;
+    right: 100px;
+    bottom: 5px;
+    opacity: .7;
 }
 
 #hands {
@@ -90,7 +98,6 @@ button {
     }
 
     #button-div {
-        position: absolute;
         right: 0;
         bottom: 0;
         margin: 10px 0px 0px 10px;
