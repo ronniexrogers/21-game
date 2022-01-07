@@ -1,9 +1,9 @@
 //game variables
 const deck = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
 ]
 let dealerHand, playerHand, playerHandValue, dealerHandValue
 let suits = ["♠", "♣", "♥", "♦"]
@@ -13,6 +13,7 @@ let resetButton = document.querySelector("#reset-button")
 let playerScore = 0
 let dealerScore = 0
 let gameOver = false
+let hasBlackJack = false
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
 const standButton = document.querySelector("#stand")
@@ -21,6 +22,8 @@ const rulesButton = document.querySelector("#rules-button")
 const rules = document.querySelector("#game-rules")
 const closeRules = document.querySelector("#close-rules")
 const bgMusic = document.querySelector("#bg-audio")
+const winSound = document.querySelector("#win")
+const loseSound = document.querySelector("#lose")
 
 //function to hide start game button
 function hideStart() {
@@ -28,13 +31,17 @@ newGameButton.style.display = "none"
 }
 hideStart()
 
+function hideHitAndStand() {
+    document.querySelector("#hit").style.display = "none"
+    document.querySelector("#stand").style.display = "none"
+}
+
 //combines suits array with ranks array and creates new array called deckVisual
 for(let i=0; i<4; i++) {
     for(let j=0; j<13; j++) {
         deckVisual.push(ranks[j] + suits[i])
     }
 }
-console.log(deckVisual)
 
 //function draws a random card from the deck array
 function drawRandomCard(deck) {
@@ -58,11 +65,12 @@ function hitMe() {
         document.querySelector("#hit").style.display = "none"
         document.querySelector("#stand").style.display = "none"
         document.getElementById("game-message").innerHTML = `Dealer wins! You busted! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
-        document.getElementById("dealer-hand").innerText = `Dealer's new hand is: ${dealerHand}`
+        document.getElementById("dealer-hand").innerText = `Dealer's hand was: ${dealerHand}`
         document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
         modalContainer.classList.add("show")
         document.querySelector("#dealer-score").innerText = dealerScore += 1
         newGameButton.style.display = "inline"
+        loseSound.play()
     }
     document.getElementById("player-hand").innerText = `Your new hand is: ${playerHand}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
@@ -93,20 +101,24 @@ function compareValues(d, p) {
         document.getElementById("game-message").innerText = `You win! Dealer BUSTS! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#player-score").innerText = playerScore += 1
         newGameButton.style.display = "inline"
+        winSound.play()
     }else if(d > p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `Dealer wins! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#dealer-score").innerText = dealerScore += 1
         newGameButton.style.display = "inline"
+        loseSound.play()
     }else if(d < p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `You win! You have ${getHandValue(playerHand)} and the dealer has ${getHandValue(dealerHand)}.`
         document.querySelector("#player-score").innerText = playerScore += 1
         newGameButton.style.display = "inline"
+        winSound.play()
     }else if(d === p) {
         modalContainer.classList.add("show")
         document.getElementById("game-message").innerText = `Push! You both have ${getHandValue(playerHand)}.`
         newGameButton.style.display = "inline"
+        winSound.play()
     }
 }
 
@@ -120,6 +132,9 @@ function startGame() {
     document.getElementById("dealer-hand").innerText = `Dealer's hand is: ?${dealerHand[1]}`
     document.getElementById("dealer-hand-value").innerText = `Value: ???`
     modalContainer.classList.remove("show")
+    if(getHandValue(playerHand) > 21) {
+        startGame()
+    }
 }
 startGame()
 
@@ -172,4 +187,3 @@ function toggleMusic() {
         document.querySelector("#bg-music-button").innerHTML = "🔇"
     }
 }
-
