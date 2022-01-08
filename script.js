@@ -1,18 +1,18 @@
 //game variables
-const deck = [
+let dealerHand, playerHand, playerHandValue, dealerHandValue
+let deck = [
     2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
     2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
     2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11, 
     2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11
 ]
-let dealerHand, playerHand, playerHandValue, dealerHandValue
+let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
 let suits = ["♠", "♣", "♥", "♦"]
 let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-let deckVisual = []
 let resetButton = document.querySelector("#reset-button")
+let deck2 = []
 let playerScore = 0
 let dealerScore = 0
-let gameOver = false
 let hasBlackJack = false
 let isMuted = true
 const hitButton = document.querySelector("#hit")
@@ -27,6 +27,17 @@ const winSound = document.querySelector("#win")
 const loseSound = document.querySelector("#lose")
 const blackjackSound = document.querySelector("#blackjack")
 
+//function to create array with card objects
+function getDeck() {
+    for(let i=0; i<suits.length; i++) {
+        for(let x=0; x<ranks.length; x++) {
+            let card = {rank: ranks[x], suit: suits[i], value: values[x]}
+            deck2.push(card)
+        }
+    }
+}
+getDeck()
+
 //function to hide start game button
 function hideStart() {
 newGameButton.style.display = "none"
@@ -36,13 +47,6 @@ hideStart()
 function hideHitAndStand() {
     document.querySelector("#hit").style.display = "none"
     document.querySelector("#stand").style.display = "none"
-}
-
-//combines suits array with ranks array and creates new array called deckVisual
-for(let i=0; i<4; i++) {
-    for(let j=0; j<13; j++) {
-        deckVisual.push(ranks[j] + suits[i])
-    }
 }
 
 //function draws a random card from the deck array
@@ -216,4 +220,4 @@ document.querySelector("#bg-music-button").addEventListener("click", () => {
     toggleMusic()
 })
 
-
+console.log(deck2)
