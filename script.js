@@ -198,7 +198,7 @@ function toggleMusic() {
     if (bgMusic.paused) {
         bgMusic.play()
         bgMusic.loop = true
-        bgMusic.volume = .5
+        bgMusic.volume = .3
         document.querySelector("#bg-music-button").innerHTML = "🔈"
         isMuted = false
     }else{
