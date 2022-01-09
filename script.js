@@ -9,7 +9,6 @@ let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 let resetButton = document.querySelector("#reset-button")
 let playerScore = 0
 let dealerScore = 0
-let hasBlackJack = false
 let isMuted = true
 const hitButton = document.querySelector("#hit")
 const newGameButton = document.querySelector("#new-game")
@@ -41,17 +40,6 @@ function visualHand(hand) {
         visualHand.push(hand[i].rank, hand[i].suit)
     }
     return visualHand.join("")
-}
-
-//function to hide start game button
-function hideStart() {
-newGameButton.style.display = "none"
-}
-hideStart()
-
-function hideHitAndStand() {
-    document.querySelector("#hit").style.display = "none"
-    document.querySelector("#stand").style.display = "none"
 }
 
 //function draws a random card from the deck array
@@ -135,15 +123,15 @@ function compareValues(d, p) {
 
 //function assigns two random cards from deck array to player and dealer
 function startGame() {
-    hideStart()
+    newGameButton.style.display = "none"
     playerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     document.getElementById("player-hand").innerText = `Your hand is: ${visualHand(playerHand)}`
     document.getElementById("player-hand-value").innerText = `Value: ${getHandValue(playerHand)}`
-    document.getElementById("dealer-hand").innerText = `Dealer's hand is: ?, ${dealerHand[1].rank}${dealerHand[1].suit}`
+    document.getElementById("dealer-hand").innerText = `Dealer's hand is: ? ${dealerHand[1].rank}${dealerHand[1].suit}`
     document.getElementById("dealer-hand-value").innerText = `Value: ???`
     modalContainer.classList.remove("show")
-    if(getHandValue(playerHand) > 21) {
+    if(getHandValue(playerHand) > 21 || getHandValue(dealerHand) > 21) {
         startGame()
     }else if(getHandValue(playerHand) === 21) {
         modalContainer.classList.add("show")
@@ -155,13 +143,11 @@ function startGame() {
         document.getElementById("dealer-hand").innerText = `Dealer's hand was: ${visualHand(dealerHand)}`
         document.getElementById("dealer-hand-value").innerText = `Value: ${getHandValue(dealerHand)}`
         if(isMuted === false){blackjackSound.play()}
-    }else if(getHandValue(dealerHand) > 21) {
-        dealerHand = [drawRandomCard(deck), drawRandomCard(deck)]
     }
 }
 startGame()
 
-//event listener for new game button.
+//event listener for deal again button.
 newGameButton.addEventListener("click", () => {
     startGame() 
     document.querySelector("#hit").style.display = "inline"
@@ -224,6 +210,3 @@ function toggleMusic() {
 document.querySelector("#bg-music-button").addEventListener("click", () => {
     toggleMusic()
 })
-
-console.log(playerHand)
-console.log(dealerHand)
