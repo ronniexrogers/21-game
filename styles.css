@@ -109,6 +109,10 @@ button {
         margin: 10px 0px 0px 10px;
     }
 
+    #bg-music-button {
+        padding: 5px 0px 5px 0px
+    }
+
     #rules-button {
         opacity: .7;
     }
