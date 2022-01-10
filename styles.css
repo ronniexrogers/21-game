@@ -132,6 +132,7 @@ button {
 
 #h1-header {
     animation: color-change 3s infinite;
+    font-family: Brush Script MT;
   }
   
 @keyframes color-change {
