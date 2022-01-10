@@ -135,7 +135,7 @@ function startGame() {
         startGame()
     }else if(getHandValue(playerHand) === 21) {
         modalContainer.classList.add("show")
-        document.getElementById("game-message").innerText = `BLACKJACK!`
+        document.getElementById("game-message").innerHTML = "<b>BLACKJACK!</b>"
         document.querySelector("#player-score").innerText = playerScore += 2
         newGameButton.style.display = "inline"
         document.querySelector("#hit").style.display = "none"
