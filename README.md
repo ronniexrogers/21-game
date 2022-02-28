@@ -15,9 +15,9 @@
 
 -Technologies used in this project were Javascript, CSS, and HTML5.  I wanted to keep my first project simple.
 
-<b>Try it for yourself!</b> 
+<b><a href="https://ronnie-rogers-blackjack.netlify.app/">Try it for yourself!</b></a>
 <br>
-https://ronniexrogers.github.io/
+https://ronnie-rogers-blackjack.netlify.app/
 <br>
 -It is player vs dealer (dealer is automated). 
 <br>
