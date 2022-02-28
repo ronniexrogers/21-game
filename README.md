@@ -1,6 +1,6 @@
 <h1> 21 (Blackjack) by Ronnie Rogers</h1>
 
--Welcome to my very first ever project! I built this game during my first month of my Software Engineering Immersive course.
+-Welcome to my very first ever project! I built this game during the first month of my Software Engineering Immersive course.
 
 -I did not initially set out to make this game text based, but it turned out to be a bit more time consuming than I initially anticipated. So, for the time being, the game will be text based with visual cards added later on.
 
